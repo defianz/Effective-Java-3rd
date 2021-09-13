@@ -3,6 +3,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -53,6 +54,9 @@ class MainTest {
         //when
         System.out.println("compare = " + compare);
 
+        String hi = "HIHIHI";
+      BigInteger a = new BigInteger("100");
+
 
         //then
     }
@@ -64,9 +68,43 @@ class MainTest {
         }
     }
 
-    private static final Comparator<Integer> COMPARATOR =
+    @Test
+    public void extend() throws Exception {
+        // given
+        Object a = new Object();
+        Object b = new Object();
+
+        //when
+        extend_sub test = new extend_sub(1L,2L);
+        test.hi();
+        //then
+    }
+
+    public class extend_sub extends extend_super{
+        private Long id_sub;
+
+        public extend_sub(Long id, Long id_sub) {
+            super(id);
+            this.id_sub = id_sub;
+        }
 
 
+        public void hi(){
+            System.out.println("this = ");
+        }
+    }
+
+    class extend_super {
+        private Long id;
+
+        public extend_super(Long id) {
+            this.id = id;
+        }
+
+        public void hi(){
+            System.out.println("hi");
+        }
+    }
 
 }
     

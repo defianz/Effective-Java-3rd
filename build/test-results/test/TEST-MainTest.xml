@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-13T02:43:57" hostname="Defianui-MacBookPro.local" time="0.014">
+<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-13T07:47:47" hostname="Defianui-MacBookPro.local" time="0.015">
   <properties/>
-  <testcase name="Comparable()" classname="MainTest" time="0.014"/>
+  <testcase name="extend()" classname="MainTest" time="0.015"/>
   <system-out><![CDATA[Before===========================
-compare = 0
+this = 
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
