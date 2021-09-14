@@ -1,12 +1,11 @@
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.AbstractList;
+import java.util.Collection;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -103,6 +102,72 @@ class MainTest {
 
         public void hi(){
             System.out.println("hi");
+        }
+    }
+
+    @Test
+    public void abstract_test() throws Exception {
+        // given
+        abstract_sub a = new abstract_sub_sub();
+        a.hi();
+        a.hi2();
+
+        Collection
+        //when
+
+        new AbstractList<>(){
+
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public Object get(int index) {
+                return null;
+            }
+        };
+        //then
+    }
+
+    class abstract_sub_sub extends abstract_sub {
+
+    }
+
+    abstract class abstract_sub extends abstract_super implements interface_super, Map.Entry {
+        @Override
+        public Object getKey() {
+            return null;
+        }
+
+        @Override
+        public Object getValue() {
+            return null;
+        }
+
+        @Override
+        public Object setValue(Object value) {
+            return null;
+        }
+
+        @Override
+        public void hi(){
+            System.out.println("hi2");
+        }
+    }
+
+    abstract class abstract_super {
+
+        public void hi(){
+            System.out.println("hi");
+        }
+    }
+
+    interface interface_super {
+        public void hi();
+
+        default void hi2(){
+            System.out.println("hi default");
         }
     }
 

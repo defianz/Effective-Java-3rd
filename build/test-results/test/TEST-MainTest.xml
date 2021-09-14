@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-13T07:47:47" hostname="Defianui-MacBookPro.local" time="0.015">
+<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-14T13:28:25" hostname="Defianui-MacBookPro.local" time="0.013">
   <properties/>
-  <testcase name="extend()" classname="MainTest" time="0.015"/>
+  <testcase name="abstract_test()" classname="MainTest" time="0.013"/>
   <system-out><![CDATA[Before===========================
-this = 
+hi2
+hi default
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
