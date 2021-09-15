@@ -1,6 +1,7 @@
 MainTest.java
  MainTest
  MainTest$1
+ MainTest$Favorite
  MainTest$Tdd_test
  MainTest$abstract_sub
  MainTest$abstract_sub_sub

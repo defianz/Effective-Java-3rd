@@ -217,5 +217,37 @@ class MainTest {
         return arg;
     }
 
+
+
+    @Test
+    public void favorite_test() throws Exception {
+        // given
+        Favorite f = new Favorite();
+        f.putFavorite(String.class,"Java");
+        f.putFavorite(Integer.class,0xcafebabe);
+        f.putFavorite(Class.class,Favorite.class);
+        String favoriteString = f.getFavorite(String.class);
+        int favoriteInteger = f.getFavorite(Integer.class);
+        Class<?> favoriteClass = f.getFavorite(Class.class);
+        //when
+        System.out.printf("%s %x %s%n",favoriteString, favoriteInteger, favoriteClass.getName());
+        //then
+    }
+
+    public class Favorite{
+        private final Map<Class<?>, Object> favorites;
+
+        Favorite(){
+            favorites = new HashMap<>();
+        }
+
+        public <T> void putFavorite(Class<T> t, T o){
+            favorites.put(t,o);
+        }
+
+        public <T> T getFavorite(Class<T> t){
+            return t.cast(favorites.get(t));
+        }
+    }
 }
     
