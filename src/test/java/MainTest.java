@@ -3,9 +3,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
-import java.util.AbstractList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
+import java.util.function.UnaryOperator;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -112,7 +111,7 @@ class MainTest {
         a.hi();
         a.hi2();
 
-        Collection
+
         //when
 
         new AbstractList<>(){
@@ -169,6 +168,53 @@ class MainTest {
         default void hi2(){
             System.out.println("hi default");
         }
+    }
+
+
+    @Test
+    public void generic() throws Exception {
+        // given
+        List<Integer> li = new ArrayList<>();
+        List<String> ls = new ArrayList<>();
+
+        List<Object> tt = new ArrayList<>();
+        List<Object> tt2 = new ArrayList<>();
+
+
+        List<abstract_sub_sub> la = new ArrayList<>();
+        List<?> ttt = new ArrayList<>();
+
+
+        Set<abstract_sub> aa = new HashSet<>();
+        Comparator<Object> objectComparator = Collections.reverseOrder();
+
+        String[] strings = {"aa","bb","cc"};
+        UnaryOperator<String> sameString = identityFunction();
+        for (String string : strings) {
+            System.out.println(sameString.apply(string));
+        }
+
+        tt.add("ggasdfa");
+
+        //when
+        String[] hi = ttt("a","b","b","c");
+        //then
+    }
+
+
+    private static UnaryOperator<Object> IDENTIFY_FN = (t) -> t;
+
+    @SuppressWarnings("unchecked")
+    public static <T> UnaryOperator<T> identityFunction(){
+        return (UnaryOperator<T>) IDENTIFY_FN;
+    }
+
+
+    static <T> T[] ttt(T... arg){
+        for (T s: arg) {
+            System.out.println("s = " + s);
+        }
+        return arg;
     }
 
 }
