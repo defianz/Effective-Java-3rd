@@ -2,6 +2,11 @@ MainTest.java
  MainTest
  MainTest$1
  MainTest$Favorite
+ MainTest$Operation
+ MainTest$Operation$1
+ MainTest$Operation$2
+ MainTest$Operation$3
+ MainTest$Operation$4
  MainTest$Tdd_test
  MainTest$abstract_sub
  MainTest$abstract_sub_sub
@@ -9,3 +14,4 @@ MainTest.java
  MainTest$extend_sub
  MainTest$extend_super
  MainTest$interface_super
+ MainTest$plant

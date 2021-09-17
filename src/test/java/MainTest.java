@@ -249,5 +249,60 @@ class MainTest {
             return t.cast(favorites.get(t));
         }
     }
+
+    @Test
+    public void ENUM() throws Exception {
+        // given
+        System.out.println("plant.flower.leaf = " + plant.flower.leaf);
+        //when
+
+        for (plant value : plant.values()) {
+            System.out.println("value = " + value.leaf);
+            System.out.println("value = " + value.toString());
+            System.out.println("value = " + value);
+        }
+        //then
+        System.out.println("Operation.PLUS.apply(10,2) = " + Operation.PLUS.apply(10, 2));
+        EnumSet<Operation> plus = EnumSet.of(Operation.PLUS, Operation.MINUS);
+    }
+
+    public enum Operation {
+        PLUS {
+            public double apply(double a, double b){
+                return a + b;
+            }
+        },
+        MINUS {
+            public double apply(double a, double b){
+                return a - b;
+            }
+        },
+        DEVIDE  {
+            public double apply(double a, double b){
+                return a / b;
+            }
+        },
+        TIMES {
+            public double apply(double a, double b){
+                return a * b;
+            }
+        };
+
+        public abstract double apply(double a, double b);
+    }
+
+    public enum plant {
+
+        flower(5),
+        tree(100),
+        glass(10);
+
+        private final int leaf;
+
+        plant(int leaf){
+            this.leaf = leaf;
+        }
+    }
+
 }
     
