@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.*;
 import java.util.function.UnaryOperator;
 
+import static java.util.Comparator.comparingInt;
 import static org.assertj.core.api.Assertions.*;
 
 class MainTest {
@@ -302,6 +303,25 @@ class MainTest {
         plant(int leaf){
             this.leaf = leaf;
         }
+    }
+
+    @Test
+    public void lambda() throws Exception {
+        // given
+        List<String> words = new ArrayList<>();
+        words.add("hasdfas");
+        words.add("zv zlxv");
+        words.sort(comparingInt(String::length));
+
+        List<String> test = List.of("zxcvz","sdkafnlsdf");
+        for (String s : test) {
+            System.out.println("s = " + s);
+        }
+        //when
+        for (String word : words) {
+            System.out.println("word = " + word);
+        }
+        //then
     }
 
 }

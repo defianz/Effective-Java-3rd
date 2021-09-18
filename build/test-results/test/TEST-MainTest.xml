@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-17T07:44:23" hostname="Defianui-MacBookPro.local" time="0.02">
+<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-09-18T12:53:03" hostname="Defianui-MacBookPro.local" time="0.017">
   <properties/>
-  <testcase name="ENUM()" classname="MainTest" time="0.02"/>
+  <testcase name="lambda()" classname="MainTest" time="0.017"/>
   <system-out><![CDATA[Before===========================
-plant.flower.leaf = 5
-value = 5
-value = flower
-value = flower
-value = 100
-value = tree
-value = tree
-value = 10
-value = glass
-value = glass
-Operation.PLUS.apply(10,2) = 12.0
+s = zxcvz
+s = sdkafnlsdf
+word = hasdfas
+word = zv zlxv
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
