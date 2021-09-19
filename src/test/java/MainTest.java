@@ -4,9 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
 import java.util.*;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static java.util.Comparator.comparing;
 import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.minBy;
 import static org.assertj.core.api.Assertions.*;
 
 class MainTest {
@@ -321,6 +327,169 @@ class MainTest {
         for (String word : words) {
             System.out.println("word = " + word);
         }
+        //then
+
+        test.sort(comparingInt((s) -> s.length()));
+
+
+//        (s) -> s.length == String::length; ??
+
+    }
+
+
+    public enum Opertaion {
+        PLUS("+",(x,y) -> x + y);
+
+        private final String symbol;
+        private final DoubleBinaryOperator op;
+
+        Opertaion(String symbol, DoubleBinaryOperator op){
+            this.symbol = symbol;
+            this.op = op;
+        }
+
+
+        @Override
+        public String toString() {
+            return symbol;
+        }
+
+        public double apply(double a, double b){
+            return this.op.applyAsDouble(a,b);
+        }
+    }
+
+    @Test
+    public void Operation_test(){
+        //given
+        int a = 10;
+        int b = 20;
+
+        //when
+        double result = Opertaion.PLUS.apply(10, 20);
+        //then
+        assertThat(result).isEqualTo(30);
+
+
+    }
+
+    @Test
+    public void lambda_method(){
+        //given
+        Map<Integer, String> map = new HashMap<>();
+        map.put(2,"aaa");
+        Integer key = 2;
+        map.merge(key,"Hi",(count, incr) -> {
+            System.out.println("count = " + count);
+            System.out.println("incr = " + incr);
+            return count + incr;
+        });
+
+        LinkedHashMap<String, Integer> lhm = new LinkedHashMap<>();
+        lhm.put("hi",10);
+
+        //when
+
+        //then
+    }
+
+    @Test
+    public void Mersenne_prime() {
+        primes()
+                .map(p -> BigInteger.TWO.pow(p.intValueExact()).subtract(BigInteger.ONE))
+                .filter(mersenne -> mersenne.isProbablePrime(50))
+                .limit(20)
+                .forEach(System.out::println);
+    }
+
+    @Test
+    public void stream_flatmap(){
+        //given
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            map.put("key"+i,i);
+        }
+
+        Map<String, Integer> map2 = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            map2.put("key2"+i,i);
+        }
+
+        Set<String> h1 = map.keySet();
+        Set<String> h2 = map2.keySet();
+
+        List<String> collect = h1.stream().flatMap(k1 ->
+                h2.stream().map(
+                        k2 -> k1 + k2
+                ).filter(
+                        key -> key.equals("key1key26")
+                )
+        ).collect(Collectors.toList());
+        for (String s : collect) {
+            System.out.println("s = " + s);
+        }
+        //when
+
+        //then
+    }
+
+    static Stream<BigInteger> primes(){
+        return Stream.iterate(BigInteger.TWO, BigInteger::nextProbablePrime);
+    }
+
+
+    @Test
+    public void make_stream(){
+        //given
+        List<String> word = List.of("hi","asdfa");
+        Stream<String> stream = word.stream();
+        Stream<List<String>> word1 = Stream.of(word);
+        Stream<String> stringStream = Stream.of(word).flatMap(v1 -> Stream.of("v1" + v1));
+        List<String> collect = stringStream.collect(Collectors.toList());
+        for (String s : collect) {
+            System.out.println("s = " + s);
+        }
+
+        List<String> collect1 = stream.collect(Collectors.toList());
+        for (String s : collect1) {
+            System.out.println("s = " + s);
+        }
+
+
+        List<String> z = Stream.of(word).flatMap(v1 -> Stream.of("z").map(
+                v2 -> v1 + v2
+        )).collect(Collectors.toList());
+        for (String s : z) {
+            System.out.println("s = " + s);
+        }
+
+
+        Set<String> set = new HashSet<>();
+        set.add("h1");
+        set.add("asdfa");
+
+        Stream.of(set).forEach(
+                v1 -> System.out.println("v1 = " + v1)
+        );
+
+
+        Map<String, Integer> freq = new HashMap<>();
+
+        Map<String, Long> collect2 = freq.keySet().stream().collect(Collectors.groupingBy(v1 -> v1.toLowerCase(), counting()));
+
+        List<String> topTen = freq.keySet().stream()
+                .sorted(comparing(freq::get,Collections.reverseOrder()))
+                .limit(10)
+                .collect(Collectors.toList());
+
+        List<String> str = new ArrayList<>();
+        str.add("1");
+        str.add("sdafasfdl");
+
+        String collect3 = str.stream().collect(Collectors.joining(","));
+        System.out.println("collect3 = " + collect3);
+        //when
+
         //then
     }
 
