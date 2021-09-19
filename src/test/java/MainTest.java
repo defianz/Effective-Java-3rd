@@ -3,10 +3,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
@@ -491,6 +493,72 @@ class MainTest {
         //when
 
         //then
+    }
+
+
+    @Test
+    public void stream_pipeline() throws Exception {
+        // given
+        long count = LongStream.rangeClosed(2, (long) Math.pow(10,8))
+//                .parallel()
+                .mapToObj(v -> BigInteger.valueOf(v))
+                .filter(i -> i.isProbablePrime(50))
+                .count();
+        System.out.println("count = " + count);
+        //when
+
+        //then
+    }
+
+    @Test
+    public void testdate() throws Exception {
+        // given
+        Date start = new Date();
+        Date end = new Date();
+
+        Period p = new Period(start,end);
+        System.out.println("p.end = " + p.end);
+        end.setTime(10L);
+        System.out.println("p.end = " + p.end);
+
+
+    }
+
+    class Period{
+        private final Date start;
+        private final Date end;
+
+        public Period(Date start, Date end) {
+            if(start.compareTo(end) > 0) {
+                throw new IllegalArgumentException(
+                        start +"가 " + end + " 보다 늦다.");
+            }
+
+            this.start = start;
+            this.end = end;
+        }
+    }
+
+    @Test
+    public void periodtest2() throws Exception {
+        LocalDateTime start = LocalDateTime.now();
+        LocalDateTime end = LocalDateTime.now();
+
+        Period2 p = new Period2(start,end);
+        System.out.println("p.end = " + p.end);
+        end = LocalDateTime.now();
+        System.out.println("p.end = " + p.end);
+
+    }
+
+    class Period2{
+        private final LocalDateTime start;
+        private final LocalDateTime end;
+
+        public Period2 (LocalDateTime start, LocalDateTime end){
+            this.start = start;
+            this.end = end;
+        }
     }
 
 }
