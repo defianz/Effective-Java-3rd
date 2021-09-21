@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
@@ -596,6 +597,110 @@ class MainTest {
             this.start = start;
             this.end = end;
         }
+    }
+
+    @Test
+    public void iterator_tdd() throws Exception {
+        // given
+        Collection<Integer> test = Arrays.asList(new Integer[]{1,2,3,4,5});
+        for (Integer integer : test) {
+            System.out.println("integer = " + integer);
+        }
+
+
+        for (Iterator<Integer> i = test.iterator(); i.hasNext(); ){
+            System.out.println("i = " + i);
+            System.out.println("i.next() = " + i.next());
+            
+        }
+
+        int[] a = new int[]{1,2,3,4,5};
+
+        System.out.println("a = " + a);
+        System.out.println("System.identityHashCode(a[0]) = " + System.identityHashCode(a[0]));
+        System.out.println("Integer.toHexString(System.identityHashCode(a[0])) = " + Integer.toHexString(System.identityHashCode(a[0])));
+
+
+        Random r = new Random();
+        int i = r.nextInt(3);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void Exception_tdd() throws Exception {
+        try {
+            lowlevelexception();
+        } catch(Exception e){
+            System.out.println("High Exception");
+            throw new Exception(e);
+        }
+    }
+
+    public void lowlevelexception() {
+         throw new IllegalArgumentException("Low Exception");
+    }
+
+    static boolean stopRequested = false;
+
+    @Test
+    public void Thread_tdd() throws Exception {
+
+        Thread backgroundThread = new Thread(()->{
+            int i = 0;
+            while(!stopRequested) {
+                i++;
+                System.out.println(i);
+            }
+        });
+
+        backgroundThread.start();
+        TimeUnit.SECONDS.sleep(1);
+
+        stopRequested = true;
+
+    }
+
+
+    private static int number;
+    private static volatile Object lock = new Object();
+
+    public  void addNumber(){
+        synchronized(lock){
+            number++;
+        }
+
+    }
+
+
+
+    @Test
+    public void valatile_test() throws Exception {
+
+        Thread thread1 = new Thread(() -> {
+            for (int i = 0; i < 500; i++) {
+                System.out.println("Thread1 number = " + number);
+                addNumber();
+//                number++;
+
+            }
+        });
+
+        Thread thread2 = new Thread(() -> {
+            for (int i = 0; i < 500; i++) {
+                System.out.println("Thread2 number = " + number);
+//                number++;
+                addNumber();
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+
+//        System.out.println("number = " + number);
+
     }
 }
     
